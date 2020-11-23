@@ -11,6 +11,7 @@ class Game extends Phaser.Scene {
     }
 
     create() {
+        this.physics.world.setBoundsCollision(true,true,true, false);
 
         //adding background
         this.add.image(400, 250, 'background');
@@ -27,6 +28,7 @@ class Game extends Phaser.Scene {
 
         //adding ball
         this.ballImage = this.physics.add.image(400, 30, 'ball');
+        this.ballImage.setCollideWorldBounds(true);
 
     
         
