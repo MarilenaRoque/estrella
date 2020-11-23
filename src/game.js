@@ -21,21 +21,33 @@ class Game extends Phaser.Scene {
 
 
         //adding platform
-        this.platformImage = this.physics.add.image(400, 470, 'platform');
+        this.platformImage = this.physics.add.image(400, 470, 'platform').setImmovable();
         this.platformImage.body.allowGravity = false;
-        this.cursors = this.input.keyboard.createCursorKeys();
 
-    
+
         //adding ball
         this.ballImage = this.physics.add.image(400, 30, 'ball');
 
-        //this piece of code make the platform collide with the ball,
+    
+        
+        // set a random velocity
+        let ballVelocity = 100 * Phaser.Math.Between(1.2, 2);
+                 // Set a random condition to change the direction
+        if (Phaser.Math.Between(0, 10) > 5) {
+            ballVelocity = ballVelocity * -1;
+        }
+        this.ballImage.setVelocity(ballVelocity, 10);
+
+       //this piece of code make the platform collide with the ball,
         // but the force of the ball make the platform move
         this.physics.add.collider(this.platformImage, this.ballImage);
+
 
         // this piece of code makes the ball be lanced with the same force that it touched
         //the platform, but part of the force is lost because the platform moves
         this.ballImage.setBounce(1);
+
+        this.cursors = this.input.keyboard.createCursorKeys();
 
     }
 
